@@ -1,0 +1,25 @@
+ These initial
+results indicate that very few MLP architectures benefit from
+JIT compilation, where its overhead can be seen to cause an
+increase in the overall execution time for most of the training
+runs. In general, the results suggest that JIT compilation has
+a more detrimental effect as the depth of the MLP increases.
+Whilst JIT compilation in TensorFlow is currently work-inprogress, these results are perhaps surprising. The overall
+computation requirement of training an MLP increases as
+the depth and width of the MLP increases, by incorporating
+additional but equivalent computations. Therefore, one would
+expect the performance benefit of JIT compilation to increase
+as MLP architecture gets larger. The results may therefore
+suggest an issue with TensorFlow’s ability to cache compiled
+computations, additional overhead involved in the calls to the
+external compiled binaries, or inefficiencies in the generated
+operation kernels themselves. The results also show that JIT
+compilation harms training performance more for larger batch
+sizes. Specifying larger batch sizes results in much more
+parallelized computation by incorporating more elements into
+each matrix-multiply operation. Standard TensorFlow uses
+highly optimized linear algebra libraries such as NVIDIA’s
+cuDNN for GPU, and Eigen or Intel’s MKL-DNN for CPU.
+This means that the ability for JIT compilation via XLA to
+outperform these libraries is likely diminished as the batch
+size increases.

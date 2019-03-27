@@ -1,0 +1,2 @@
+The part a of comparison with scikit learn exisits in 2 python notebooks : RansomForests-CompareTrees; RandomForests-CompareFeatures
+The remaining parts are placed in correctly in their nameplace python notebooks
